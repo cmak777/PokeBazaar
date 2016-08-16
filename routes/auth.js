@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
+var Customer = require('../models/customer');
 
 module.exports = function(passport, mongoStore) {
 
@@ -19,7 +19,7 @@ module.exports = function(passport, mongoStore) {
 
           // Save session ID to user object
           // We do this regardless of whether or not we restored a session
-          User.findByIdAndUpdate(req.user._id, {sessionId: req.session.id}, function(err) {
+          Customer.findByIdAndUpdate(req.user._id, {sessionId: req.session.id}, function(err) {
             next(err);
           });
         }
@@ -27,7 +27,7 @@ module.exports = function(passport, mongoStore) {
     } else {
       // Save session ID to user object
       // We do this regardless of whether or not we restored a session
-      User.findByIdAndUpdate(req.user._id, {sessionId: req.session.id}, function(err) {
+      Customer.findByIdAndUpdate(req.user._id, {sessionId: req.session.id}, function(err) {
         next(err);
       });
     }

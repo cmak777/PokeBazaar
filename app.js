@@ -17,7 +17,7 @@ var hbs = require('hbs');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
-var User = require('./models/user');
+var Customer = require('./models/customer');
 var register = require('./routes/register');
 
 var app = express();
@@ -47,7 +47,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+  Customer.findById(id, function(err, user) {
     done(err, user);
   });
 });
@@ -55,7 +55,7 @@ passport.deserializeUser(function(id, done) {
 // passport strategy
 passport.use(new LocalStrategy(function(username, password, done) {
     // Find the user with the given username
-    User.findOne({ username: username }, function (err, user) {
+    Customer.findOne({ username: username }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
         console.error(err);

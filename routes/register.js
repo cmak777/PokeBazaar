@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user')
+var Customer = require('../models/customer')
 
 // GET registration page
 router.get('/register', function(req, res) {
@@ -9,13 +9,15 @@ router.get('/register', function(req, res) {
 
 // POST registration page
 var validateReq = function(userData) {
+  console.log (userData.username)
   return (userData.username && userData.password && userData.email &&
-    (userData.password === userData.passwordRepeat));
+    (userData.password === userData.passwordRepeat));
 };
 
 router.post('/register', function(req, res, next) {
   // validation step
   if (!validateReq(req.body)) {
+    console.log(req.body);
     return res.render('register', {
       error: "Fields missing or passwords don't match",
       data: req.body
@@ -23,7 +25,7 @@ router.post('/register', function(req, res, next) {
   }
 
   // Don't create duplicate users
-  User.findOne({"$or": [{username: req.body.username}, {email: req.body.email}]}, function(err, user) {
+  Customer.findOne({"$or": [{username: req.body.username}, {email: req.body.email}]}, function(err, user) {
     if (err) return next(err);
     if (user)
       return res.render('register', {
@@ -31,8 +33,7 @@ router.post('/register', function(req, res, next) {
       });
 
     // Okay to create
-    var code = randomCode();
-    var u = new User({
+    var u = new Customer({
       // username is phone number
       username: req.body.username,
       email: req.body.email,
