@@ -6,12 +6,12 @@ router.get('/', function(req, res, next) {
   res.render('mainPage');
 });
 
-router.get('/', function(req, res, next) {
+router.get('/results', function(req, res, next) {
   res.render('results');
 });
 
-router.get('/', function(req, res, next) {
-  res.render('mainPage');
+router.get('/profile/:id', function(req, res, next) {
+  res.render('profile');
 });
 
 
