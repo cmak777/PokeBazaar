@@ -6,4 +6,13 @@ router.get('/', function(req, res, next) {
   res.render('mainPage');
 });
 
+router.get('/', function(req, res, next) {
+  res.render('results');
+});
+
+router.get('/', function(req, res, next) {
+  res.render('mainPage');
+});
+
+
 module.exports = router;
