@@ -4,7 +4,7 @@ var User = require('../models/user')
 
 // GET registration page
 router.get('/register', function(req, res) {
-  res.render('register/index');
+  res.render('register');
 });
 
 // POST registration page
@@ -16,7 +16,7 @@ var validateReq = function(userData) {
 router.post('/register', function(req, res, next) {
   // validation step
   if (!validateReq(req.body)) {
-    return res.render('index', {
+    return res.render('register', {
       error: "Fields missing or passwords don't match",
       data: req.body
     });
@@ -26,7 +26,7 @@ router.post('/register', function(req, res, next) {
   User.findOne({"$or": [{username: req.body.username}, {email: req.body.email}]}, function(err, user) {
     if (err) return next(err);
     if (user)
-      return res.render('index', {
+      return res.render('register', {
         error: "This phone number or email address is already registered"
       });
 
