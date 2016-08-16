@@ -30,8 +30,6 @@ router.post('/register', function(req, res, next) {
         error: "This phone number or email address is already registered"
       });
 
-    // Okay to create
-    var code = randomCode();
     var u = new User({
       // username is phone number
       username: req.body.username,
