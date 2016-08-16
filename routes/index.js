@@ -6,10 +6,6 @@ router.get('/', function(req, res, next) {
   res.render('mainPage');
 });
 
-router.get('/register', function(req, res, next) {
-  res.render('register');
-});
-
 router.get('/results', function(req, res, next) {
   res.render('results');
 });
