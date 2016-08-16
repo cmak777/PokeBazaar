@@ -18,7 +18,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 var User = require('./models/user');
-
+var register = require('./routes/register');
 
 var app = express();
 mongoose.connect(process.env.MONGODB_URI);
@@ -77,6 +77,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 ));
 
 app.use('/', auth(passport, mongoStore));
+app.use('/', register);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

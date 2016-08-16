@@ -66,18 +66,6 @@ module.exports = function(passport, mongoStore) {
     res.redirect('/login');
   });
 
-  // FACEBOOK
-
-  router.get('/auth/facebook',
-    passport.authenticate('facebook'));
-
-  router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    restoreSession,
-    function(req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/');
-    });
 
   return router;
 };
