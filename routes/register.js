@@ -29,7 +29,7 @@ router.post('/register', function(req, res, next) {
     if (err) return next(err);
     if (user)
       return res.render('register', {
-        error: "This phone number or email address is already registered"
+        error: "This username or email address is already registered"
       });
 
     // Okay to create
