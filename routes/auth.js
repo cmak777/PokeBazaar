@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
-var constants = require('../constants');
 
 module.exports = function(passport, mongoStore) {
 
@@ -43,9 +42,6 @@ module.exports = function(passport, mongoStore) {
   // Custom handler, to handle the verify case.
   router.post('/login', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
-      // User still needs to verify phone number
-      if (info && info.code && info.code===constants.PLEASE_VERIFY)
-        return res.redirect('/register/' + info.userId + '/confirm');
 
       if (err) { return next(err); }
       if (!user) { return res.redirect('/login'); }
