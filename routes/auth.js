@@ -35,7 +35,7 @@ module.exports = function(passport, mongoStore) {
 
   // GET Login page
   router.get('/login', function(req, res) {
-    res.render('auth/login');
+    res.render('login');
   });
 
   // POST Login page
