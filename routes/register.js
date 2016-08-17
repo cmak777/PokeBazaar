@@ -37,7 +37,7 @@ router.post('/register', function(req, res, next) {
       // username is phone number
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password
+      password: Customer.generateHash(req.body.password)
     });
     u.save(function(err, user) {
       if (err) {
