@@ -7,11 +7,17 @@
     <input type="text" placeholder="Search for (Pokémon)..." class="form-control">
   </div>
   <div class="form-group">
-    <input type="text" placeholder="Search for (CP)..." class="form-control">
+    <input type="number" placeholder="Search for (CP)..." class="form-control">
   </div>
   <div class="form-group">
     <input type="text" placeholder="Search for (Location)..." class="form-control">
   </div>
+  <select>
+      <option value="mostBids">Most Bids</option>
+      <option value="mostTrusted">Most Trusted</option>
+      <option value="CP">CP</option>
+      <option value="endingSoonest">Ending Soonest</option>
+  </select>
   <div class="form-group">
     <button class="btn btn-primary">Submit</button>
   </div>
@@ -36,3 +42,4 @@
   </td>
 {{/each}}
 </table>
+<a href="/" class="btn btn-primary">Back to Homepage</a>

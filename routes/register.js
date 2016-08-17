@@ -61,10 +61,17 @@ router.get('/', function(req, res, next) {
   }
 });
 
+router.post('/', function(req, res, next) {
+  res.redirect('/results');
+});
+
 router.get('/results', function(req, res, next) {
   res.render('results');
 });
 
+router.post('/results', function(req, res, next) {
+  res.render('results');
+});
 
 // Beyond this point the user must be logged in
 // Note: code duplicated in shop.js
