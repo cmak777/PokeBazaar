@@ -54,7 +54,7 @@ passport.deserializeUser(function(id, done) {
 
 // passport strategy
 passport.use(new LocalStrategy(function(username, password, done) {
-    // Find the user with the given username
+    // Find the user with the given
     Customer.findOne({ username: username }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
