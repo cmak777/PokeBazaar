@@ -1,39 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>PokeBazaar</title>
-  <link href="/bootstrap.united.min.css" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <script src="/jquery.min.js"></script>
-  <script src="/bootstrap.min.js"></script>
-  <script src="/bootstrap3-typeahead.min.js"></script>
-  <style>
-    body {
-      padding-top: 60px;
-    }
-  </style>
-</head>
-<body>
-  <nav class="navbar navbar-default navbar-fixed-top" id="horizons-nav">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Bacon 🎥 Number Calculator</a>
-      </div>
-    </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-8 col-xs-offset-2">
-        {{{body}}}
-      </div>
-    </div>
+{{#if error}}
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    {{message}}
   </div>
-</body>
-</html>
+{{/if}}
+
+{{#if user}}
+<div class="form-group">
+  <a href="/profile/id" class="btn btn-primary">My Profile</a>
+</div>
+<div class="title">
+<h2> Welcome to PokeBazaar </h2>
+</div>
+<form method="POST"  to ="/result" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+<div class="search-bar">
+  <input type="text" placeholder="search for pokemon"> </input>
+</div>
+<div class="search-bar">
+  <input type="number" placeholder="search for CP"> </input>
+</div>
+<div class="form-group">
+  <button class="btn btn-primary">Search for Pokemon to trade</button>
+</div>
+</form>
+
+<div class="recent-trade">
+<h3> Recent Listed trade request </h3>
+{{# each list }}
+<div class="single-trade">
+  {{this.user}}
+  {{this.picture}}
+  {{this.forTrade}}
+  {{this. number}}
+  {{this.time}}
+</div>
+{{/each}}
+</div>
+
+
+{{else}}
+<div class="form-group">
+  <a href="/login" class="btn btn-primary">Login</a>
+</div>
+<div class="form-group">
+  <a href="/register" class="btn btn-primary">Register</a>
+</div>
+<div class="title">
+<h2> Welcome to PokeBazaar </h2>
+</div>
+<form method="POST" style="max-width: 300px; margin: auto; margin-top: 50px; border: 0.5px solid gray; padding: 30px 30px 30px 30px">
+<div class="search-bar">
+  <input type="text" placeholder="search for pokemon"> </input>
+</div>
+<div class="search-bar">
+  <input type="number" placeholder="search for CP"> </input>
+</div>
+<div class="form-group">
+  <a href="/search" class="btn btn-primary">Search for Pokemon to trade</a>
+</div>
+</form>
+
+<div class="recent-trade">
+<h3> Recent Listed trade request </h3>
+{{# each list }}
+<div class="single-trade">
+  {{this.user}}
+  {{this.picture}}
+  {{this.forTrade}}
+  {{this. number}}
+  {{this.time}}
+</div>
+{{/each}}
+</div>
+
+{{/if}}

@@ -54,11 +54,24 @@ router.post('/register', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  res.render('mainPage');
+  if (req.user)
+  {res.render('mainPage', {user:true})}
+  else{
+    res.render('mainPage', {user:false})
+  }
 });
 
 router.get('/results', function(req, res, next) {
   res.render('results');
+});
+
+
+// Beyond this point the user must be logged in
+// Note: code duplicated in shop.js
+router.use(function(req, res, next) {
+  if (!req.isAuthenticated())
+    return res.redirect('/login');
+  next();
 });
 
 router.get('/profile/:id', function(req, res, next) {
@@ -71,13 +84,6 @@ router.get('/auctions/:id', function(req, res, next) {
 
 router.get('/auctions/owner/:id/', function(req, res, next) {
   res.render('profile');
-});
-// Beyond this point the user must be logged in
-// Note: code duplicated in shop.js
-router.use(function(req, res, next) {
-  if (!req.isAuthenticated())
-    return res.redirect('/login');
-  next();
 });
 
 
