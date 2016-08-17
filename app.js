@@ -54,7 +54,7 @@ passport.deserializeUser(function(id, done) {
 
 // passport strategy
 passport.use(new LocalStrategy(function(username, password, done) {
-    // Find the user with the given 
+    // Find the user with the given
     Customer.findOne({ username: username }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
@@ -67,7 +67,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
         return done(null, false, { message: 'Incorrect username.' });
       }
       // if passwords do not match, auth failed
-      if (user.password !== user.validPassword(password)) {
+      if (!user.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       // auth has has succeeded
