@@ -75,7 +75,14 @@ router.post('/results', function(req, res, next) {
 });
 
 router.get('/auctions/new',function(req,res,next){
-  res.render('newAuction')
+  if(!req.user)
+    {
+      res.redirect('/login');
+    }
+    else
+    {
+        res.render('newAuction')
+    }
 })
 
 router.post('/auctions/new',function(req,res,next){
