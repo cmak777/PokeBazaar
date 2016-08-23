@@ -86,10 +86,14 @@ router.get('/auctions/new',function(req,res,next){
 })
 
 router.post('/auctions/new',function(req,res,next){
-  var a=new Auction({
+  var a = new Auction({
     seller: req.user.id,
     sellerPokemon: req.body.sell,
-    buyerPokemon: req.body.buy
+    sellerCP: req.body.sellcp,
+    buyerPokemon: req.body.buy,
+    buyerCP: req.body.buycp,
+    description: req.body.description,
+    completed: false
   }).save(function(err){
     if (err){res.status(500).send("error saving auction")}
     res.redirect('/myProfile')
@@ -108,6 +112,7 @@ router.use(function(req, res, next) {
 router.get('/myProfile', function(req, res, next) {
   Auction.find({seller: req.user.id},function(error,auctions){
     if (error){console.log(error)}
+    // console.log("THESE ARE WHAT THE AUCTIONS LOOK LIKE", auctions)
     res.render('profile',{list:auctions});
   })
 
