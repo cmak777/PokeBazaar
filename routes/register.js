@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Customer = require('../models/customer')
+var Auction=require('../models/auction')
 
 // GET registration page
 router.get('/register', function(req, res) {
@@ -73,6 +74,29 @@ router.post('/results', function(req, res, next) {
   res.render('results');
 });
 
+router.get('/auctions/new',function(req,res,next){
+  if(!req.user)
+    {
+      res.redirect('/login');
+    }
+    else
+    {
+        res.render('newAuction')
+    }
+})
+
+router.post('/auctions/new',function(req,res,next){
+  var a=new Auction({
+    seller: req.user.id,
+    sellerPokemon: req.body.sell,
+    buyerPokemon: req.body.buy
+  }).save(function(err){
+    if (err){res.status(500).send("error saving auction")}
+    res.redirect('/myProfile')
+  })
+
+})
+
 // Beyond this point the user must be logged in
 // Note: code duplicated in shop.js
 router.use(function(req, res, next) {
@@ -81,8 +105,12 @@ router.use(function(req, res, next) {
   next();
 });
 
-router.get('/profile/:id', function(req, res, next) {
-  res.render('profile');
+router.get('/myProfile', function(req, res, next) {
+  Auction.find({seller: req.user.id},function(error,auctions){
+    if (error){console.log(error)}
+    res.render('profile',{list:auctions});
+  })
+
 });
 
 router.get('/auctions/:id', function(req, res, next) {
@@ -92,6 +120,7 @@ router.get('/auctions/:id', function(req, res, next) {
 router.get('/auctions/owner/:id/', function(req, res, next) {
   res.render('profile');
 });
+
 
 
 
