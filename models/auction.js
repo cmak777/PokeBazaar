@@ -13,10 +13,24 @@ var auctionSchema = mongoose.Schema({
      ref: 'Customer'
   },
   sellerPokemon: {
-  	type: String
+  	type: Number,
+    required: true
+  },
+  sellerCP: {
+    type: Number,
+    required: true
   },
   buyerPokemon: {
   	type: String
+  },
+  buyerCP: {
+    type: Number
+  },
+  description: {
+    type: String
+  },
+  completed: {
+    type: Boolean
   }
 });
 auctionSchema.plugin(findOrCreate);
