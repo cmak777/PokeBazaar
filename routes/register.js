@@ -95,7 +95,7 @@ router.post('/auctions/new',function(req,res,next){
     description: req.body.description,
     completed: false
   }).save(function(err){
-    if (err){res.status(500).send("error saving auction")}
+    if (err){res.status(500).send("error saving auction", err); return}
     res.redirect('/myProfile')
   })
 
@@ -111,7 +111,7 @@ router.use(function(req, res, next) {
 
 router.get('/myProfile', function(req, res, next) {
   Auction.find({seller: req.user.id},function(error,auctions){
-    if (error){console.log(error)}
+    if (error){res.status(500).send(error); return}
     // console.log("THESE ARE WHAT THE AUCTIONS LOOK LIKE", auctions)
     res.render('profile',{list:auctions});
   })

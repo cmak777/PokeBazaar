@@ -13,7 +13,7 @@ var auctionSchema = mongoose.Schema({
      ref: 'Customer'
   },
   sellerPokemon: {
-  	type: Number,
+  	type: String,
     required: true
   },
   sellerCP: {
